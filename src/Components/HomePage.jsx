@@ -1,25 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import SearchBar from "./SearchBar";
+
 
 export default function HomePage() {
-  const url =
-    "https://newsapi.org/v2/everything?q=bitcoin&apiKey=ddd665792adf475aa5d5977961160eb0";
-
   const [newsData, setNewsData] = useState([]);
 
-  const getNewsData = () => {
+  const getNewsData = (searchNews) => {
+      const newUrl= `https://newsapi.org/v2/everything?q=${searchNews}&apiKey=a414a4d043bf46a3a4589a46d5c4c3e9`
     axios
-      .get(url)
+      .get(newUrl)
       .then((res) => {
         setNewsData(res.data.articles);
-        console.log(res.data.articles);
       })
-      .catch((err) => console.log(err));
-  };
-
-  const showDetailedNews = (news) => {
-    console.log(news);
+      .catch((err) => alert(err.response.data.message));
   };
 
   const displayArticles = () => {
@@ -32,7 +27,6 @@ export default function HomePage() {
               <h5 className="card-title">{news.title}</h5>
               <p className="card-text">{news.description}</p>
               <button
-                onClick={() => showDetailedNews(news)}
                 className="btn btn-primary"
                 type="button"
                 data-bs-toggle="modal"
@@ -84,9 +78,10 @@ export default function HomePage() {
 
   useEffect(() => {
     getNewsData();
-  }, []);
+  });
   return (
-    <div className="container">
+    <div className="container-fluid">
+      <div className="row"><SearchBar getNewsData={getNewsData} /></div>
       <div className="row">{displayArticles()}</div>
     </div>
   );
