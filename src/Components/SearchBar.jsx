@@ -2,16 +2,16 @@ import React from "react";
 
 function SearchBar() {
   return (
-    <nav class="navbar navbar-light bg-light">
-      <div class="container-fluid">
-        <form class="d-flex">
+    <nav className="navbar navbar-light bg-light mb-5">
+      <div className="container">
+        <form className="d-flex">
           <input
-            class="form-control me-2"
+            className="form-control me-2"
             type="search"
             placeholder="Search"
             aria-label="Search"
           />
-          <button class="btn btn-outline-success" type="submit">
+          <button className="btn btn-outline-success" type="submit">
             Search
           </button>
         </form>
